@@ -1,0 +1,9 @@
+https://tailwindcss.com/docs/guides/vite
+npm create vite@latest Client -- --template react
+npm install
+npm run dev
+
+-- react router dom
+https://reactrouter.com/en/main/start/tutorial
+npm install react-router-dom
+npm install localforage match-sorter sort-by

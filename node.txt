@@ -7,3 +7,13 @@ npm run dev
 https://reactrouter.com/en/main/start/tutorial
 npm install react-router-dom
 npm install localforage match-sorter sort-by
+
+--https://daisyui.com/docs/install/
+npm i -D daisyui@latest
+
+-- https://react-icons.github.io/react-icons/
+npm install react-icons --save
+react-icons --save
+
+--https://react-slick.neostack.com/docs/get-started
+npm install slick-carousel --save

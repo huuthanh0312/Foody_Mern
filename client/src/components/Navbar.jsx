@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from '../../public/logo.png';
 import { BiPhoneCall } from 'react-icons/bi';
+import { FaUser } from 'react-icons/fa';
+import Modal from './Modal';
+import { AuthContext } from '../contexts/AuthProvider';
+
 const Navbar = () => {
 	const [sticky, setSticky] = useState(false);
+	const { user } = useContext(AuthContext);
+	console.log(user);
 	//handle scroll function
 	useEffect(() => {
 		const handleScroll = () => {
@@ -122,10 +128,13 @@ const Navbar = () => {
 								</div>
 							</div>
 						</label>
-						{/* button contact */}
-						<a className="btn bg-green rounded-full px-6 text-white items-center gap-2">
-							<BiPhoneCall /> Contact
-						</a>
+						{/* button login modal */}
+						<button
+							onClick={() => document.getElementById('login').showModal()}
+							className="btn bg-green rounded-full px-6 text-white items-center gap-2">
+							<FaUser /> Login
+						</button>
+						<Modal />
 					</div>
 				</div>
 			</header>

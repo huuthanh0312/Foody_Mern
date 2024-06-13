@@ -17,3 +17,12 @@ react-icons --save
 
 --https://react-slick.neostack.com/docs/get-started
 npm install slick-carousel --save
+
+https://react-hook-form.com/get-started
+npm install react-hook-form
+
+https://console.firebase.google.com/u/0/project/foody-client-83add/overview
+npm install firebase
+
+https://vitejs.dev/guide/env-and-mode
+.env.local

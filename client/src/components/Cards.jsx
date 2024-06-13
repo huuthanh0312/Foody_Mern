@@ -16,7 +16,7 @@ const Cards = ({ item }) => {
 					className={`rating gap-1 absolute cursor-pointer right-2 top-2 p-4 heartStar bg-green
             ${isHeartFilted ? 'text-rose-500' : 'text-white'}`}
 					onClick={handleHeartClick}>
-					<FaHeart className="w-5 h-5 cursor-pointer" />
+					<FaHeart className="w-5 h-5" />
 				</div>
 				<Link to={`/menu/${item._id}`}>
 					<figure>
@@ -24,7 +24,9 @@ const Cards = ({ item }) => {
 					</figure>
 				</Link>
 				<div className="card-body">
-					<h2 className="card-title">{item.name}</h2>
+					<Link to={`/menu/${item._id}`}>
+						<h2 className="card-title">{item.name}</h2>
+					</Link>
 					<p>{item.recipe}</p>
 					<div className="card-actions justify-between items-center mt-2">
 						<h5 className="font-semibold">

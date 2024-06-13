@@ -4,8 +4,6 @@ const categoryItems = [
 	{ id: 2, title: 'Break Fast', description: '(12 break fast)', image: '/images/home/category/img2.png' },
 	{ id: 3, title: 'Dessert', description: '(48 dessert)', image: '/images/home/category/img3.png' },
 	{ id: 4, title: 'Browse All', description: '(255 Items)', image: '/images/home/category/img4.png' },
-	{ id: 5, title: 'Dessert', description: '(48 dessert)', image: '/images/home/category/img3.png' },
-	{ id: 6, title: 'Browse All', description: '(255 Items)', image: '/images/home/category/img4.png' },
 ];
 const Categories = () => {
 	return (

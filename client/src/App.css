@@ -32,3 +32,12 @@ header {
 	text-underline-offset: 5px;
 	color: #39db4a;
 }
+
+.Toastify__toast-container {
+	padding-top: 4rem !important;
+	z-index: 100000 !important;
+	filter: none !important;
+}
+
+.toast-container {
+}

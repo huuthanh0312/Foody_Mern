@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Modal from './Modal';
 import { AuthContext } from '../contexts/AuthProvider';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
@@ -22,7 +24,8 @@ const SignUp = () => {
 			.then((result) => {
 				// Signed up
 				const user = result.user;
-				alert('Account Create Successfully Done');
+				toast.success('Account Create Successfully Done');
+				navigate('/');
 			})
 			.catch((error) => {
 				const errorCode = error.code;

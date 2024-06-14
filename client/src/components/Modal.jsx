@@ -3,6 +3,7 @@ import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../contexts/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Modal = () => {
 	const {
@@ -20,27 +21,33 @@ const Modal = () => {
 		signUpWithGmail()
 			.then((result) => {
 				const user = result.user;
-				alert('Login successful');
+				// alert('Login successful');
+				toast.success("'Login successful");
 			})
 			.catch((error) => console.error(error));
 	};
+
+	//Login with acount
 	const onSubmit = (data) => {
 		const email = data.email;
 		const password = data.password;
 		login(email, password)
 			.then((result) => {
 				const user = result.user;
-				alert('Login successful');
+				console.log(result);
+				document.getElementById('login').close();
+				toast.success('Sign In successful');
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
+				toast.error('Login Faild');
 				setErrorMessage('Provide a correct email and password');
 			});
 	};
 	return (
 		<>
-			<dialog id="login" className="modal">
-				<div className="modal-box">
+			<dialog id="login" className="modal z-1">
+				<div className="modal-box relative">
 					<button
 						htmlFor="login"
 						onClick={() => document.getElementById('login').close()}

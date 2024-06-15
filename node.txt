@@ -29,3 +29,8 @@ https://vitejs.dev/guide/env-and-mode
 
 toastify
 npm install --save react-toastify
+
+validation hook form
+https://www.npmjs.com/package/@hookform/resolvers
+npm install --save yup
+npm install @hookform/resolvers

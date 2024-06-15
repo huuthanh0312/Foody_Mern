@@ -17,8 +17,8 @@ const Categories = () => {
 				{categoryItems.map((item, i) => (
 					<div
 						key={i}
-						className="shadow-lg rounded-md bg-white py-6 px-5 w-72 mx-auto text-center cursor-pointer 
-              hover:translate-y-4 duration-300 transition-all">
+						className="shadow-lg rounded-md bg-white py-6 px-5 w-60 mx-auto text-center cursor-pointer 
+              hover:translate-y-4 hover:shadow-2xl duration-300 transition-all">
 						<div className="flex w-full mx-auto justify-center items-center ">
 							<img src={item.image} alt="" className="bg-[#C1F1C6] p-5 rounded-full w-28 h-28" />
 						</div>

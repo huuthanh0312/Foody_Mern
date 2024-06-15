@@ -1,30 +1,51 @@
 import React, { useContext, useState } from 'react';
-import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash, FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
+import { Link, useLocation, useNavigate, useNavigation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../contexts/AuthProvider';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Modal = () => {
+	const { signUpWithGmail, login } = useContext(AuthContext);
+	const [errorMessage, setErrorMessage] = useState('');
+	const [showPassword, setShowPassword] = useState(false);
+	const navigate = useNavigate();
+	const location = useLocation();
+	const from = location?.pathname || '/';
+	// validation form register
+	const formSchema = Yup.object().shape({
+		email: Yup.string().email().required('Email is required'),
+		password: Yup.string()
+			.required('Password is required')
+			.min(8, 'Password length should be at least 8 characters')
+			.max(16, 'Password cannot exceed more than 16 characters'),
+	});
+
+	// form submit
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors },
-	} = useForm();
-
-	const { signUpWithGmail, login } = useContext(AuthContext);
-	const [errorMessage, setErrorMessage] = useState('');
+	} = useForm({
+		mode: 'onTouched',
+		resolver: yupResolver(formSchema),
+	});
 
 	// google sign in gmail
 	const handleLoginGmail = () => {
 		signUpWithGmail()
 			.then((result) => {
 				const user = result.user;
-				// alert('Login successful');
 				toast.success("'Login successful");
+				navigate(from, { replace: true });
 			})
-			.catch((error) => console.error(error));
+			.catch((error) => {
+				console.error(error);
+				toast.error('Login failed');
+			});
 	};
 
 	//Login with acount
@@ -37,12 +58,20 @@ const Modal = () => {
 				console.log(result);
 				document.getElementById('login').close();
 				toast.success('Sign In successful');
+				navigate(from, { replace: true });
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
-				toast.error('Login Faild');
 				setErrorMessage('Provide a correct email and password');
 			});
+	};
+
+	const showPasswordClick = () => {
+		if (showPassword === true) {
+			setShowPassword(false);
+		} else {
+			setShowPassword(true);
+		}
 	};
 	return (
 		<>
@@ -64,26 +93,37 @@ const Modal = () => {
 							<label className="label">
 								<span className="label-text">Email</span>
 							</label>
-							<input type="email" {...register('email', { required: true })} placeholder="email" className="input input-bordered" />
+							<input type="email" {...register('email')} placeholder="email" className="input input-bordered" />
 						</div>
-
+						<p className="alerts text-red">{errors.email?.message}</p>
 						{/* Password */}
 						<div className="form-control">
-							<label className="label">
-								<span className="label-text">Password</span>
-							</label>
-							<input
-								type="password"
-								{...register('password', { required: true })}
-								placeholder="password"
-								className="input input-bordered"
-							/>
-							<label className="label mt-1">
-								<a href="#" className="label-text-alt link link-hover">
-									Forgot password?
-								</a>
-							</label>
+							<div className="flex flex-col md:flex-row justify-between items-center">
+								<label className="label">
+									<span className="label-text">Password</span>
+								</label>
+								<label className="label mt-1">
+									<a href="#" className="label-text-alt link link-hover text-primary">
+										Forgot password?
+									</a>
+								</label>
+							</div>
+							<div className="relative">
+								<input
+									type={showPassword ? 'text' : 'password'}
+									{...register('password')}
+									className="py-3 px-4 w-full input input-bordered"
+									placeholder="Enter password"
+								/>
+								<button
+									type="button"
+									className="absolute top-0 end-0 p-3.5 rounded-e-md"
+									onClick={() => showPasswordClick()}>
+									{showPassword ? <FaEye /> : <FaEyeSlash />}
+								</button>
+							</div>
 						</div>
+						<p className="alerts text-red mb-2">{errors.password?.message}</p>
 						{/* error */}
 						{errorMessage ? <p className="text-red">{errorMessage}</p> : ''}
 						<div className="form-control mt-1">
@@ -99,7 +139,9 @@ const Modal = () => {
 						</div>
 					</form>
 					<div className="text-center space-x-3 ">
-						<button onClick={handleLoginGmail} className="btn btn-circle btn-outline hover:text-white hover:bg-green mr-2">
+						<button
+							onClick={handleLoginGmail}
+							className="btn btn-circle btn-outline hover:text-white hover:bg-green mr-2">
 							<FaGoogle />
 						</button>
 						<button className="btn btn-circle btn-outline hover:text-white hover:bg-green mr-2">

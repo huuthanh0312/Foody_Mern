@@ -20,12 +20,12 @@ const Cards = ({ item }) => {
 				</div>
 				<Link to={`/menu/${item._id}`}>
 					<figure>
-						<img src={item.image} alt="Shoes" className="hover:scale-95 transition-all duration-300 md:h-50" />
+						<img src={item.image} alt="Shoes" className="w-60 hover:scale-95 transition-all duration-300 md:h-50" />
 					</figure>
 				</Link>
 				<div className="card-body">
 					<Link to={`/menu/${item._id}`}>
-						<h2 className="card-title">{item.name}</h2>
+						<h2 className="card-title text-center">{item.name}</h2>
 					</Link>
 					<p>{item.recipe}</p>
 					<div className="card-actions justify-between items-center mt-2">

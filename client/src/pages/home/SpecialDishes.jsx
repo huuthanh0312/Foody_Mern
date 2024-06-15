@@ -46,6 +46,17 @@ const SpecialDishes = () => {
 				settings: {
 					slidesToShow: 3,
 					slidesToScroll: 3,
+					initialSlide: 3,
+					infinite: true,
+					dots: true,
+				},
+			},
+			{
+				breakpoint: 900,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+					initialSlide: 2,
 					infinite: true,
 					dots: true,
 				},

@@ -13,7 +13,8 @@ const Modal = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const navigate = useNavigate();
 	const location = useLocation();
-	const from = location?.pathname || '/';
+	const from = location.state?.from?.pathname || '/';
+
 	// validation form register
 	const formSchema = Yup.object().shape({
 		email: Yup.string().email().required('Email is required'),
@@ -39,8 +40,8 @@ const Modal = () => {
 		signUpWithGmail()
 			.then((result) => {
 				const user = result.user;
-				toast.success("'Login successful");
 				navigate(from, { replace: true });
+				toast.success("'Login successful");
 			})
 			.catch((error) => {
 				console.error(error);
@@ -57,8 +58,8 @@ const Modal = () => {
 				const user = result.user;
 				console.log(result);
 				document.getElementById('login').close();
-				toast.success('Sign In successful');
 				navigate(from, { replace: true });
+				toast.success('Sign In successful');
 			})
 			.catch((error) => {
 				const errorMessage = error.message;

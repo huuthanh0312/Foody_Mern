@@ -11,10 +11,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 const SignUp = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const from = location.state?.from?.pathname || '/';
-	//const from = location.state?.pathname || '/';
-	//console.log(from);
 	const [showPassword, setShowPassword] = useState(false);
+
+	const from = location.state?.from?.pathname || '/';
 
 	// validation form register
 	const formSchema = Yup.object().shape({

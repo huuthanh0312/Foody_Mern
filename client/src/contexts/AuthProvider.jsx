@@ -37,26 +37,24 @@ const AuthProvider = ({ children }) => {
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 
-	//logout
-	const logout = () => {
-		setLoading(true);
-		return signOut(auth);
-	};
-
 	// update profile
-	const updateUserProfile = ({ name, photoURL }) => {
-		setLoading(true);
+	const updateUserProfile = (name, photoURL) => {
 		return updateProfile(auth.currentUser, {
 			displayName: name,
 			photoURL: photoURL,
 		});
 	};
 
+	//logout
+	const logout = () => {
+		return signOut(auth);
+	};
+
 	//check sign in user profile
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-			setUser(currentUser);
 			setLoading(false);
+			setUser(currentUser);
 		});
 		return () => {
 			return unsubscribe();

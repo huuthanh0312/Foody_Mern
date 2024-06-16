@@ -1,15 +1,14 @@
 import React, { useContext } from 'react';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaCogs, FaShoppingCart, FaSignOutAlt, FaUserCheck, FaUserCog } from 'react-icons/fa';
 import { AuthContext } from '../contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const Profile = (user) => {
+const Profile = ({ user }) => {
 	const { logout } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || '/';
-
 	const handleLogout = () => {
 		logout()
 			.then(() => {
@@ -26,8 +25,8 @@ const Profile = (user) => {
 				<input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 				<div className="drawer-content">
 					{/* Page content here */}
-					<label htmlFor="my-drawer-4" className="drawer-button btn btn-ghost btn-circle avatar">
-						<div className="w-10 rounded-full rounded-circle">
+					<label htmlFor="my-drawer-4" className="drawer-button btn  btn-circle avatar ">
+						<div className="w-8 rounded-full rounded-circle ring ring-success ring-offset-base-100 ring-offset-2">
 							{user.photoURL ? (
 								<img alt="Profile" src={user.photoURL} />
 							) : (
@@ -36,21 +35,30 @@ const Profile = (user) => {
 						</div>
 					</label>
 				</div>
+
 				<div className="drawer-side">
 					<label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
 					<ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
 						{/* Sidebar content here */}
 						<li>
-							<a href="/update-profile">Profile</a>
+							<a href="/update-profile" className="hover:underline hover:text-green">
+								<FaUserCheck /> Profile
+							</a>
 						</li>
 						<li>
-							<a>Order</a>
+							<a className="hover:underline hover:text-green">
+								<FaShoppingCart /> Order
+							</a>
 						</li>
 						<li>
-							<a>Setting</a>
+							<a className="hover:underline hover:text-green">
+								<FaCogs /> Settings
+							</a>
 						</li>
 						<li>
-							<a onClick={handleLogout}>Logout</a>
+							<a onClick={handleLogout} className="hover:underline hover:text-red">
+								<FaSignOutAlt /> Logout
+							</a>
 						</li>
 					</ul>
 				</div>

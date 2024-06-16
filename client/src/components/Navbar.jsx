@@ -9,7 +9,7 @@ import Profile from './Profile';
 const Navbar = () => {
 	const [sticky, setSticky] = useState(false);
 	const { user, logout } = useContext(AuthContext);
-	console.log(user);
+
 	//handle scroll function
 	useEffect(() => {
 		const handleScroll = () => {

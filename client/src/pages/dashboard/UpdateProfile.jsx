@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const UpdateProfile = () => {
-	const { updateUserProfile } = useContext(AuthContext);
+	const { user, updateUserProfile } = useContext(AuthContext);
 	const {
 		register,
 		handleSubmit,
@@ -20,11 +20,12 @@ const UpdateProfile = () => {
 	const onSubmit = (data) => {
 		const name = data.name;
 		const photoURL = data.photoURL;
+		//update profile
 		updateUserProfile(name, photoURL)
 			.then(() => {
 				// Profile updated!
 				navigate(from, { replace: true });
-				// ...
+				toast.success('Update Profile Successfully');
 			})
 			.catch((error) => {
 				toast.error('Update Profile Failed');
@@ -45,6 +46,8 @@ const UpdateProfile = () => {
 							type="text"
 							placeholder="your name"
 							className="input input-bordered"
+							value={user.displayName}
+							autoFocus
 							required
 						/>
 					</div>
@@ -52,7 +55,6 @@ const UpdateProfile = () => {
 						<label className="label">
 							<span className="label-text">Upload Photo</span>
 						</label>
-
 						<input
 							type="text"
 							{...register('photoURL')}
@@ -60,9 +62,6 @@ const UpdateProfile = () => {
 							className="input input-bordered"
 							required
 						/>
-
-						{/* TODO: Uplodaing image will be later */}
-						{/* <input type="file" className="file-input w-full max-w-xs" /> */}
 					</div>
 					<div className="form-control mt-6">
 						<button className="btn bg-green text-white">Update</button>

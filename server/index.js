@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 // Api menu
 app.use('/api/menu', menuRouter);
 //Api Cart
-app.use('/api/cart', cartRouter);
+app.use('/api/carts', cartRouter);
 // error handler
 app.use(notFound);
 app.use(errorHandler);

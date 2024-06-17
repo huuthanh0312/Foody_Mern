@@ -34,3 +34,10 @@ validation hook form
 https://www.npmjs.com/package/@hookform/resolvers
 npm install --save yup
 npm install @hookform/resolvers
+
+// confirmation
+npm install sweetalert2
+
+
+// cart hooks : https://tanstack.com/query/latest
+npm i @tanstack/react-query

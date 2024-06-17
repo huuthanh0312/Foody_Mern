@@ -69,7 +69,7 @@ const updateCartById = asyncHandler(async (req, res) => {
 const deleteCartById = asyncHandler(async (req, res) => {
 	const cartId = req.params.id;
 	try {
-		const deleteCart = await Cart.findAndDelete(cartId);
+		const deleteCart = await Cart.findByIdAndDelete(cartId);
 		if (!deleteCart) {
 			return res.status(401).json({ message: 'Cart Items Not Found!' });
 		}

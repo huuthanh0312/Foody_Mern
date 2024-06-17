@@ -1,0 +1,8 @@
+https://expressjs.com/en/starter/hello-world.html
+npm init -y
+
+npm install express nodemon cors dotenv mongodb
+
+huuthanhnguyen0312
+lry0DX5HFC1keK0u
+npm install mongoose --save

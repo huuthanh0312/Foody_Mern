@@ -39,14 +39,13 @@ const UpdateProfile = () => {
 					<h3 className="font-bold">Update Your Profile</h3>
 					<div className="form-control">
 						<label className="label">
-							<span className="label-text">Name</span>
+							<span className="label-text">Name : {user.displayName}</span>
 						</label>
 						<input
 							{...register('name')}
 							type="text"
 							placeholder="your name"
 							className="input input-bordered"
-							value={user.displayName}
 							autoFocus
 							required
 						/>

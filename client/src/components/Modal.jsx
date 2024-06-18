@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const Modal = () => {
-	const { signUpWithGmail, login } = useContext(AuthContext);
+	const { signUpWithGmail, login, loading, loadingLoginFaild } = useContext(AuthContext);
 	const [errorMessage, setErrorMessage] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 	const navigate = useNavigate();
@@ -56,12 +56,13 @@ const Modal = () => {
 		login(email, password)
 			.then((result) => {
 				const user = result.user;
-				console.log(result);
 				document.getElementById('login').close();
+				loadingLoginFaild();
 				navigate(from, { replace: true });
-				toast.success('Sign In successful');
+				toast.success('Sign In Successfully');
 			})
 			.catch((error) => {
+				loadingLoginFaild();
 				const errorMessage = error.message;
 				setErrorMessage('Provide a correct email and password');
 			});
@@ -84,7 +85,7 @@ const Modal = () => {
 						className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
 						✕
 					</button>
-					<form className="card-body" method="dialog" onSubmit={handleSubmit(onSubmit)}>
+					<form id="login-form" className="card-body" method="dialog" onSubmit={handleSubmit(onSubmit)}>
 						<div className="flex flex-col md:flex-row  items-center justify-between">
 							<img src="/logo.png" alt="" className="md:max-w-20" />
 							<h3 className="font-semibold text-lg ">Thanh Foody Login! 👋</h3>
@@ -128,12 +129,20 @@ const Modal = () => {
 						{/* error */}
 						{errorMessage ? <p className="text-red">{errorMessage}</p> : ''}
 						<div className="form-control mt-1">
-							<input type="submit" className="btn text-white bg-green" value="Login" />
+							{loading ? (
+								<div className="btn text-white bg-green justify-center items-center ">
+									<div className=" loading loading-bars loading-xs"></div>
+								</div>
+							) : (
+								<>
+									<input type="submit" className="btn text-white bg-green" value="Login" />
+								</>
+							)}
 						</div>
 						<div className="form-control justify-center items-center">
 							<p>
 								Don't have an account?{' '}
-								<Link to="/signup" className="text-green">
+								<Link to="/signup" className="text-green pl-1">
 									Sign Up
 								</Link>
 							</p>

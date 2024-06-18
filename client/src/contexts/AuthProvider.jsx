@@ -61,9 +61,14 @@ const AuthProvider = ({ children }) => {
 		};
 	}, []);
 
+	// set loading login faild
+	const loadingLoginFaild = () => {
+		setLoading(false);
+	}
 	const authInfo = {
 		user,
 		loading,
+		loadingLoginFaild,
 		createUser,
 		signUpWithGmail,
 		login,

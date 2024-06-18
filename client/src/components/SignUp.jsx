@@ -22,7 +22,7 @@ const SignUp = () => {
 			.required('Password is required')
 			.min(8, 'Password length should be at least 8 characters')
 			.max(16, 'Password cannot exceed more than 16 characters'),
-		current_password: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
+		confirm_password: Yup.string().oneOf([Yup.ref('password')], 'Passwords do not match'),
 	});
 
 	const {
@@ -62,14 +62,16 @@ const SignUp = () => {
 		}
 	};
 	return (
-		<div className="max-w-md bg-white shadow-md w-full mx-auto flex items-center justify-center my-16">
-			<div className="card flex flex-col justify-center mt-0 mb-5">
-				<Link to="/" className="btn btn-sm btn-outline btn-circle btn-ghost absolute right-0 top-1">
+		<div className="max-w-lg bg-white shadow-xl shadow-green w-full mx-auto flex items-center justify-center my-10">
+			<div className="card flex flex-col justify-center m-5 w-full ">
+				<Link to="/" className="btn btn-sm btn-outline btn-circle btn-ghost absolute right-0 top-1" title="Home">
 					✕
 				</Link>
 				<form className="card-body" method="dialog" onSubmit={handleSubmit(onSubmit)}>
 					<div className="flex flex-col md:flex-row  items-center justify-between">
-						<img src="/logo.png" alt="" className="md:max-w-20" />
+						<Link to="/">
+							<img src="/logo.png" alt="" className="md:max-w-20" title="Thanh Foody" />
+						</Link>
 						<h3 className="font-semibold text-lg ">Thanh Foody Register! 👋</h3>
 					</div>
 					{/* Email */}
@@ -86,7 +88,7 @@ const SignUp = () => {
 					</div>
 					<p className="alerts text-red">{errors.email?.message}</p>
 					{/* Password */}
-					<div className="form-control mt-1">
+					<div className="form-control">
 						<label className="label">
 							<span className="label-text">Password</span>
 						</label>
@@ -107,26 +109,27 @@ const SignUp = () => {
 					</div>
 					<p className="alerts  text-red">{errors.password?.message}</p>
 					{/* /Password */}
-					<div className="form-control mt-1">
+					<div className="form-control">
 						<label className="label">
-							<span className="label-text">Current Password</span>
+							<span className="label-text">Confirm Password</span>
 						</label>
 						<input
 							type="password"
-							{...register('current_password', { required: true })}
-							placeholder="Current Password"
+							{...register('confirm_password', { required: true })}
+							placeholder="Confirm Password"
 							className="input input-bordered"
 						/>
 					</div>
-
-					<p className="alerts  text-red">{errors.current_password?.message}</p>
-					<div className="form-control mt-1">
+					<p className="alerts text-red">{errors.confirm_password?.message}</p>
+					<div className="form-control">
 						<input type="submit" className="btn text-white bg-green" value="Sign Up" />
 					</div>
 					<div className="form-control justify-center items-center">
 						<p>
 							Already have an account?
-							<a onClick={() => document.getElementById('login').showModal()} className="text-green">
+							<a
+								onClick={() => document.getElementById('login').showModal()}
+								className="text-green hover:cursor-pointer pl-1">
 								Login
 							</a>
 						</p>

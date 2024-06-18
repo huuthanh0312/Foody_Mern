@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { AuthContext } from '../contexts/AuthProvider';
 import Swal from 'sweetalert2';
+import useCart from '../hooks/useCart';
 
 const Cards = ({ item }) => {
 	const [isHeartFilted, SetHeartFilted] = useState(false);
@@ -11,6 +12,8 @@ const Cards = ({ item }) => {
 	const { _id, name, recipe, image, price } = item;
 	const location = useLocation();
 	const navigate = useNavigate();
+	const [cart, refetch] = useCart();
+
 	// onclick add heart
 	const handleHeartClick = () => {
 		SetHeartFilted(!isHeartFilted);
@@ -35,6 +38,7 @@ const Cards = ({ item }) => {
 							timer: 1500,
 						});
 					} else {
+						refetch();
 						Swal.fire({
 							icon: 'success',
 							title: 'Add To Cart Success',
@@ -48,12 +52,17 @@ const Cards = ({ item }) => {
 				title: 'Please Login?',
 				text: "Without an acount can't able to add  product!",
 				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'SignUp Now!',
+				showDenyButton: true,
+				showCloseButton: true,
+				confirmButtonColor: '#00FF33',
+				denyButtonColor: '#3085d6',
+				confirmButtonText: `Sign In Now!`,
+				denyButtonText: 'Register Acount!',
 			}).then((result) => {
 				if (result.isConfirmed) {
+					Swal.close();
+					document.getElementById('login').show();
+				} else if (result.isDenied) {
 					navigate('/signup', { state: { from: location } });
 				}
 			});

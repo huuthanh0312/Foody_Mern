@@ -112,7 +112,20 @@ const Navbar = () => {
 						</button>
 
 						{/* Cart */}
-						<Link to="/cart">
+						{user ? (
+							<Link to="/cart">
+								<label tabIndex={0} className="mr-3 justify-center items-center hidden lg:flex">
+									<div className="dropdown dropdown-end">
+										<div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+											<div className="indicator">
+												<FaShoppingCart className="h-5 w-5" />
+												<span className="badge badge-sm indicator-item ">{cart.length || 0}</span>
+											</div>
+										</div>
+									</div>
+								</label>
+							</Link>
+						) : (
 							<label tabIndex={0} className="mr-3 justify-center items-center hidden lg:flex">
 								<div className="dropdown dropdown-end">
 									<div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -123,7 +136,7 @@ const Navbar = () => {
 									</div>
 								</div>
 							</label>
-						</Link>
+						)}
 						{/* button login modal */}
 						{user ? (
 							<Profile user={user} />

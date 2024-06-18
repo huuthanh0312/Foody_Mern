@@ -12,6 +12,7 @@ const Profile = ({ user }) => {
 	const handleLogout = () => {
 		logout()
 			.then(() => {
+				document.getElementById('login-form').reset();
 				navigate(from, { replace: true });
 				toast.success('Logout Successfully');
 			})

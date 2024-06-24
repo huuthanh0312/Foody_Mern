@@ -44,7 +44,7 @@ const SignUp = () => {
 			.then((result) => {
 				// Signed up
 				const user = result.user;
-				toast.success('Account Create Successfully Done');
+				toast.success('Account Create Successfully');
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {

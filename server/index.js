@@ -4,8 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
-import menuRouter from './routes/menuRoutes.js';
-import cartRouter from './routes/cartRoutes.js';
+import menuRoutes from './routes/menuRoutes.js';
+import cartRoutes from './routes/cartRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -18,14 +19,16 @@ app.use(express.json());
 connectDB();
 
 app.get('/', (req, res) => {
-	res.send('Hello World! Thanh Foody API');
+	res.send('Hello! Thanh Foody API');
 });
 
 //Api methods
 // Api menu
-app.use('/api/menu', menuRouter);
+app.use('/api/user', userRoutes);
+// Api menu
+app.use('/api/menu', menuRoutes);
 //Api Cart
-app.use('/api/carts', cartRouter);
+app.use('/api/carts', cartRoutes);
 // error handler
 app.use(notFound);
 app.use(errorHandler);

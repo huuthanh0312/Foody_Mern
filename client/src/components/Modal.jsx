@@ -57,8 +57,8 @@ const Modal = () => {
 			.then((result) => {
 				const user = result.user;
 				document.getElementById('login').close();
-				loadingLoginFaild();
 				navigate(from, { replace: true });
+				loadingLoginFaild();
 				toast.success('Sign In Successfully');
 			})
 			.catch((error) => {
@@ -130,8 +130,8 @@ const Modal = () => {
 						{errorMessage ? <p className="text-red">{errorMessage}</p> : ''}
 						<div className="form-control mt-1">
 							{loading ? (
-								<div className="btn text-white bg-green justify-center items-center ">
-									<div className=" loading loading-bars loading-xs"></div>
+								<div className="btn  bg-secondary justify-center items-center ">
+									<div className="loading loading-spinner loading-md text-green"></div>
 								</div>
 							) : (
 								<>

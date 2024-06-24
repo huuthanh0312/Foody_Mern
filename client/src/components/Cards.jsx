@@ -79,7 +79,7 @@ const Cards = ({ item }) => {
 				</div>
 				<Link to={`/menu/${item._id}`}>
 					<figure>
-						<img src={item.image} alt="Shoes" className="w-60 hover:scale-95 transition-all duration-300 md:h-50" />
+						<img src={item.image} alt="Shoes" className="w-40 hover:scale-95 transition-all duration-300 md:h-50" />
 					</figure>
 				</Link>
 				<div className="card-body">
